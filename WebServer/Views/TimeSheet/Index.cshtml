@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    ViewBag.Action = ViewContext.RouteData.Values["action"].ToString();
+
+    var baseUrl = $"/{ViewBag.Controller}";
+}
+<div class="py-6">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <table id="timeSheetDatatable" class="table table-bordered table-striped table-hover">
+            </table>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="container mt-5">
+            <div class="card container">
+                <div class="card-body">
+                    <div class="col-xl-11 col-lg-10 col-md-9 col-12 ">
+                        <div class="row align-items-center mt-5">
+                            <div class="col-md-2 col-xxl-1">
+                                <label class="col-form-label ">月份</label>
+                            </div>
+                            <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
+                                <input type="month" id="txtMonth" class="form-control" value="@(DateTime.Now.ToString("yyyy-MM"))">
+                            </div>
+                            <div class="col-md-2 col-xxl-2">
+                                <button id="btnExportCSV" class="btn btn-primary">匯出CSV</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(async()=>{
+            $('#timeSheetDatatable').CustomDataTable({
+                lang: "@(_SiteService.GetCurrentCulture())",
+                fetchColumns: fetchData('post', '@baseUrl/GetColumns', null),
+                getDataUrl: '@baseUrl/GetData'
+            });
+
+            $(document).on('click', '#btnExportCSV', async function (e) {
+                const month = $('#txtMonth').val();
+                window.open(`/TimeSheet/ExportCSV/${month}`, '_blank');
+            });
+        });
+    </script>
+}

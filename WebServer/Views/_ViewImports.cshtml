@@ -1,0 +1,12 @@
+﻿@using WebServer
+@using WebServer.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Microsoft.Extensions.Configuration;
+@inject IConfiguration _configuration
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<Resource> _localizer
+
+@inject WebServer.Services.SiteService _SiteService
+@addTagHelper *, WebServer

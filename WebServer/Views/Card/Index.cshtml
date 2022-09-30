@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    ViewBag.Action = ViewContext.RouteData.Values["action"].ToString();
+
+    var baseUrl = $"/{ViewBag.Controller}";
+}
+<div class="py-6">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <table id="datatableDefault" class="table table-bordered table-striped table-hover">
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(async()=>{
+            $('#datatableDefault').CustomDataTable({
+                lang: "@(_SiteService.GetCurrentCulture())",
+                fetchColumns: fetchData('post', '@baseUrl/GetColumns', null),
+                getDataUrl: '@baseUrl/GetData',
+                buttonRenderWidth : "150px",
+                buttonRender : (data, type, row, meta) =>{
+                    const sBaseURL = '@baseUrl';
+
+                    const blank = `<span style="display:block;width:10px;"></span>`
+                    const details = `<div class="d-inline-block"><a class="btn btn-xs btn-primary btn-space" data-toggle="tooltip" title="@(_localizer["Details"])" href="${sBaseURL}/Details/${row.ID}" data-id="${row.ID}"><i class="fas fa-search-plus fa-lg"></i></a></div>`;
+                    const edit = `<div class="d-inline-block"><a class="btn btn-xs btn-success btn-space" data-toggle="tooltip" title="@(_localizer["Edit"])" href="${sBaseURL}/Edit/${row.ID}" data-id="${row.ID}"><i class="fas fa-pencil-alt fa-lg"></i></a></div>`
+                    const del = `<div class="d-inline-block"><a class="btn btn-xs btn-danger btn-space" data-toggle="tooltip" title="@(_localizer["Delete"])" href="${sBaseURL}/Delete/${row.ID}" data-id="${row.ID}"><i class="far fa-trash-alt fa-lg"></i></a></div>`;
+
+                    return `<div class="d-flex align-items-center">${details}${blank}${edit}${blank}${del}</div>`;
+                }
+            });
+        });
+    </script>
+}

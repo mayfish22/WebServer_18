@@ -1,0 +1,62 @@
+﻿@model UserViewModel
+@{
+
+}
+
+<div class="container d-flex flex-column">
+   <div class="row align-items-center justify-content-center g-0 min-vh-100">
+      <div class="col-12 col-md-8 col-lg-6">
+         <div class="card">
+            <!-- card body -->
+            <div class="card-body">
+               <!-- Form -->
+                <form role="form" asp-action="Edit">
+                    <input type="hidden" asp-for="ErrorMessage" />
+                    <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+                    <input type="hidden" asp-for="User.ID" />
+                    @*藏資料, 使得驗證能PASS*@
+                    <input type="hidden" asp-for="User.Password" value="1234" />
+                    <input type="hidden" asp-for="User.ConfirmPassword" value="1234" />
+
+                    <div class="row form-group">
+                        <label asp-for="User.Account" class="col-3 form-label"></label>
+                        <input asp-for="User.Account" type="text" class="col-5 form-control">
+                        <span asp-validation-for="User.Account" class="col-4 text-danger"></span>
+                    </div>
+
+                    <div class="row form-group">
+                        <label asp-for="User.Name" class="col-3 form-label"></label>
+                        <input asp-for="User.Name" type="text" class="col-5 form-control">
+                        <span asp-validation-for="User.Name" class="col-4 text-danger"></span>
+                    </div>
+
+                    <div class="row form-group">
+                        <label asp-for="User.Email" class="col-3 form-label"></label>
+                        <input asp-for="User.Email" type="text" class="col-5 form-control">
+                        <span asp-validation-for="User.Email" class="col-4 text-danger"></span>
+                    </div>
+
+                    <div class="row form-group">
+                        <label asp-for="User.Birthday" class="col-3 form-label"></label>
+                        <input asp-for="User.Birthday" type="date" class="col-5 form-control">
+                        <span asp-validation-for="User.Birthday" class="col-4 text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group text-center btn-control mt-3">
+                        <input type="submit" value="@_localizer["Save"]" class="btn btn-lg btn-success"/>
+                        <a class="btn btn-lg btn-secondary" asp-action="Index">@_localizer["Back"]</a>
+                    </div>
+                </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(async (e)=>{
+            
+        });
+    </script>
+}

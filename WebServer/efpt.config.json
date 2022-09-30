@@ -1,0 +1,77 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "WebServerDBContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models\/WebServerDB",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "WebServer",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "Card",
+         "ObjectType": 0
+      },
+      {
+         "Name": "CardHistory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Connection",
+         "ObjectType": 0
+      },
+      {
+         "Name": "File",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ForgotPassword",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Language",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Menu",
+         "ObjectType": 0
+      },
+      {
+         "Name": "MenuTranslation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "User",
+         "ObjectType": 0
+      },
+      {
+         "Name": "vwMenu",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "WebServer",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

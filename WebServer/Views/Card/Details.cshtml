@@ -1,0 +1,61 @@
+﻿@model CardViewModel
+@{
+    var defaultUserID = Model.Card.UserID ?? "";
+    var culture = _SiteService.GetCurrentCulture();
+}
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center g-0 min-vh-100">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- Form -->
+                    <form role="form" asp-action="Details">
+                        <input type="hidden" asp-for="ErrorMessage" />
+                        <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+                        <input type="hidden" asp-for="Card.ID" />
+
+                        <div class="row form-group">
+                            <div class="col-3">
+                                <label asp-for="Card.CardNo" class="form-label" style="float:right;"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="Card.CardNo" type="text" class="form-control" readonly>
+                            </div>
+                            <div class="col-12">
+                                <span asp-validation-for="Card.CardNo" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group mt-3">
+                            <div class="col-3">
+                                <label asp-for="Card.UserID" class="form-label" style="float:right;"></label>
+                            </div>
+                            <div class="col-8">
+                                <select disabled asp-for="Card.UserID" class="col-5 form-control select2-user" defaultvalue="@defaultUserID"></select>
+                            </div>
+                            <div class="col-12">
+                                <span asp-validation-for="Card.UserID" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center btn-control mt-3">
+                            <a class="btn btn-lg btn-secondary" asp-action="Index">@_localizer["Back"]</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(async (e) => {
+            $('.select2-user').Select2User({ language: '@culture' }, function (e) {
+                console.log('change')
+            });
+        });
+    </script>
+}

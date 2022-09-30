@@ -1,0 +1,82 @@
+﻿@model SignupViewModel
+
+@{
+    Layout = "_Layout2";
+}
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center g-0 min-vh-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+            <!-- Card -->
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-6">
+                    <div class="mb-4">
+                        <a href="/Home/Index"><img src="@Url.Content("~/assets/images/brand/logo/logo-primary.svg")" class="mb-2" alt=""></a>
+                        <p class="mb-6">請輸入使用者資訊</p>
+                    </div>
+                    <!-- Form -->
+                    <form role="form" asp-action="Signup">
+                        <input type="hidden" asp-for="ErrorMessage" />
+                        <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+                        <!-- Account -->
+                        <div class="mb-3">
+                            <label asp-for="User.Account" class="form-label field-required"></label>
+                            <input asp-for="User.Account" type="text" class="form-control" placeholder="請輸入帳號">
+                            <span asp-validation-for="User.Account" class="text-danger"></span>
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label asp-for="User.Password" class="form-label field-required"></label>
+                            <input type="password" asp-for="User.Password" class="form-control" placeholder="請輸入密碼">
+                            <span asp-validation-for="User.Password" class="text-danger"></span>
+                        </div>
+                        <!-- ConfirmPassword -->
+                        <div class="mb-3">
+                            <label asp-for="User.ConfirmPassword" class="form-label field-required"></label>
+                            <input type="password" asp-for="User.ConfirmPassword" class="form-control" placeholder="請再次輸入密碼">
+                            <span asp-validation-for="User.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label asp-for="User.Name" class="form-label field-required"></label>
+                            <input asp-for="User.Name" type="text" class="form-control" placeholder="請輸入姓名">
+                            <span asp-validation-for="User.Name" class="text-danger"></span>
+                        </div>
+                        <!-- Birthday -->
+                        <div class="mb-3">
+                            <label asp-for="User.Birthday" class="form-label field-required"></label>
+                            <input asp-for="User.Birthday" type="date" class="form-control" placeholder="請輸入生日">
+                            <span asp-validation-for="User.Birthday" class="text-danger"></span>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="User.Email" class="form-label field-required"></label>
+                            <input asp-for="User.Email" type="email" class="form-control tEmail" placeholder="請輸入電子信箱">
+                            <span asp-validation-for="User.Email" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <!-- Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    建立帳號
+                                </button>
+                            </div>
+
+                            <div class="d-md-flex justify-content-between mt-4">
+                                <div class="mb-2 mb-md-0">
+                                    <a href="/Account/Signin" class="fs-5">已有帳號</a>
+                                </div>
+                                <div>
+                                    <a href="/Account/ForgotPassword" class="text-inherit fs-5">忘記密碼</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model SidebarViewModel
+
+<nav class="navbar-vertical navbar">
+    <div class="nav-scroller">
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="/Home/Index">
+            <img src="@Url.Content("~/assets/images/brand/logo/logo.svg")" alt="" />
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+            @foreach(var item in Model.Menus.Where(s=>s.Entity.IsEnabled == 1).OrderBy(s=>s.Entity.Seq))
+            {
+                var categoryID = $"menu{item.Entity.ID}";
+                //判斷是否收起
+                var isCollapsed_Parent = Model.CurrentPage != null && !(Model.CurrentPage.ID == item.Entity.ID || Model.CurrentPage.IDs.Contains(item.Entity.ID));
+                var url_Parent = string.Empty;
+                if(!string.IsNullOrEmpty(item.Entity.Controller) 
+                    || !string.IsNullOrEmpty(item.Entity.Action))
+                {
+                    url_Parent = $"/{(item.Entity.Controller ?? "")}/{(item.Entity.Action ?? "")}";
+                }
+                <li class="nav-item">
+                    @if (!item.ChildNodes.Any())
+                    {
+                        @if(Model.CurrentPage != null && item.Entity.IDs.Contains(Model.CurrentPage.ID))
+                        {
+                            //有包含, 變色
+                        <a class="nav-link has-arrow active text-info" href="@url_Parent">
+                            <i class="icon-xs me-2 @item.Entity.Icon"></i> @(item.Entity.Name)
+                        </a>
+                        }
+                        else
+                        {
+                        <a class="nav-link has-arrow active" href="@url_Parent">
+                            <i class="icon-xs me-2 @item.Entity.Icon"></i> @(item.Entity.Name)
+                        </a>
+                        }
+                        
+                    }
+                    else
+                    {
+                        @if(isCollapsed_Parent)
+                        {
+                        <a class="nav-link has-arrow collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#@categoryID" aria-expanded="false" aria-controls="#@categoryID">
+                            <i class="icon-xs me-2 @item.Entity.Icon"></i> @(item.Entity.Name)
+                        </a>
+                        }
+                        else
+                        {
+                        <a class="nav-link has-arrow " href="#!" data-bs-toggle="collapse" data-bs-target="#@categoryID" aria-expanded="true" aria-controls="#@categoryID">
+                            <i class="icon-xs me-2 @item.Entity.Icon"></i> @(item.Entity.Name)
+                        </a>
+                        }
+                        <div id="@categoryID" class="collapse @(isCollapsed_Parent?"":"show")" data-bs-parent="#sideNavbar">
+                            <ul class="nav flex-column">
+                                @foreach(var subItem in item.ChildNodes.Where(s=>s.Entity.IsEnabled == 1).OrderBy(s=>s.Entity.Seq))
+                                {
+                                    var url = $"/{(subItem.Entity.Controller ?? "")}/{(subItem.Entity.Action ?? "")}";
+                                    @if(Model.CurrentPage != null && (Model.CurrentPage.ID == subItem.Entity.ID || Model.CurrentPage.IDs.Contains(subItem.Entity.ID)))
+                                    {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-info" href="@url">
+                                            <i class="icon-xs me-2 @subItem.Entity.Icon"></i> @(subItem.Entity.Name)
+                                        </a>
+                                    </li>
+                                    }
+                                    else
+                                    {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@url">
+                                            <i class="icon-xs me-2 @subItem.Entity.Icon"></i> @(subItem.Entity.Name)
+                                        </a>
+                                    </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

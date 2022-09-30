@@ -1,0 +1,31 @@
+﻿@model string
+@{
+    var cultures = _SiteService.GetCultures();
+}
+
+<a class="btn btn-light btn-icon rounded-circle indicator indicator-primary text-muted" href="#" role="button"
+   id="dropdownLanguage" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <img class="icon-xs" src="@Url.Content($"~/images/language/{Model}.svg")">
+</a>
+
+<div class="dropdown-menu dropdown-menu-end"
+     aria-labelledby="dropdownUser">
+    <div class="px-4 pb-0 pt-2">
+        <div class="lh-1 ">
+            <h5 class="mb-1"> @_localizer["LanguageSetting"]</h5>
+        </div>
+        <div class=" dropdown-divider mt-3 mb-2"></div>
+    </div>
+
+    <ul class="list-unstyled">
+        @foreach (var item in cultures)
+        {
+            <li>
+                <a class="dropdown-item" href="javascript: void(0)" onclick="setLanguage('@item')">
+                    <img class="icon-xs" src="@Url.Content($"~/images/language/{item}.svg")">
+                    @_localizer[item]
+                </a>
+            </li>
+        }
+    </ul>
+</div>
